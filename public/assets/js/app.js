@@ -25,15 +25,12 @@ $(function() {
 		},
 
 		submitRecordForm: function(evt) {
-			console.log(this.options.list);
-
 			evt.preventDefault(); // prevent the form submit
 
 			var recordId = $('input[name=record_id]').val();
 			if (recordId > 0) {
 				// PUT request - find the record
 				var record = this.collection.where({id:recordId});
-				console.log(record[0]);
 
 				record[0].set({
 					full_name: $('input[name=full_name]').val()
@@ -79,6 +76,7 @@ $(function() {
 			var recordId = $(evt.currentTarget).attr('href');
 			var record 	 = this.collection.where({id:recordId});
 
+			// set the form values
 			$('input[name=record_id]').val(record[0].get('id'));
 			$('input[name=full_name]').val(record[0].get('full_name'));
 		},
