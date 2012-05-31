@@ -13,6 +13,8 @@
 			<?php echo Form::input('tags'); ?>
 			<span class="help-block">Tags are comma-seperated</span>
 
+			<?php echo Form::hidden('record_id'); ?>
+
 			<br/>
 			<?php echo Form::button('Submit','submit',array('class'=>'btn','id'=>'submit-record')); ?>
 
@@ -23,10 +25,6 @@
 		<h3>Recent Entries</h3>
 		<span style="font-size:10px">Click on a name to load the record</span><br/>
 		<br/>
-		<?php foreach($records as $record): ?>
-
-			<a href="#"><?php echo $record['full_name']; ?></a><br/>
-
-		<?php endforeach; ?>
+		<div id="latest-records"></div>
 	</div>
 </div>
