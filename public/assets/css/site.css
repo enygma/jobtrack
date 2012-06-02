@@ -1,0 +1,14 @@
+.top-pad {
+	padding-top: 60px;
+}
+form label {
+	color: #117EDD;
+}
+form .help-block {
+	font-size: 10px;
+	font-style: italic;
+	padding-left: 10px;
+}
+a.clear-results {
+	font-size: 11px;
+}

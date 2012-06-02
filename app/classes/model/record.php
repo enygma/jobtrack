@@ -11,6 +11,18 @@ class Model_Record extends \Orm\Model
 		)
 	);
 	protected static $_table_name = 'records';
+
+	public static function search($query)
+	{
+		$result = Model_Record::find()->where(DB::expr('lower(full_name)'),'like',"%".strtolower($query)."%");
+		$found  = array();
+
+		foreach ($result->get() as $res) {
+			$found[] = $res->to_array();
+		}
+
+		return $found;
+	}
 }
 
 ?>

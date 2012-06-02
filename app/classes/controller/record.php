@@ -81,8 +81,10 @@ class Controller_Record extends Controller_Rest
 
 	public function get_search()
 	{
-		$query = \Input::get('query');
-		error_log('searching for: '.$query);
+		$query   = \Input::get('query');
+		$results = Model_Record::search($query);
+
+		$this->response($results);
 	}
 
 }
