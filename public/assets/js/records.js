@@ -25,22 +25,27 @@ $(function() {
 		submitRecordForm: function(evt) {
 			evt.preventDefault(); // prevent the form submit
 
+			// get the values for all of our form inputs
+			var inputs = $('#record-form input');
+			var values = {};
+			jQuery.each(inputs,function(k,input){
+				var input = $(input);
+				var n 	  = input.attr('name');
+				values[n] = input.val();
+			});
+
 			var recordId = $('input[name=record_id]').val();
 			if (recordId > 0) {
 				// PUT request - find the record
 				var record = this.collection.where({id:recordId});
-
-				record[0].set({
-					full_name: $('input[name=full_name]').val()
-				});
-
+				record[0].set(values);
 				record[0].save();
+				jtUtility.alert('Information saved!','Record Saved!','success');
 
 			} else {
 				// POST request
-				records.create({
-					full_name: $('input[name=full_name]').val()
-				});
+				records.create(values);
+				jtUtility.alert('Information saved!','Record Created!','success');
 			}
 
 			$('#record-form :input').val('');
@@ -74,9 +79,7 @@ $(function() {
 			var recordId = $(evt.currentTarget).attr('href');
 			var record 	 = this.collection.where({id:recordId});
 
-			// set the form values
-			$('input[name=record_id]').val(record[0].get('id'));
-			$('input[name=full_name]').val(record[0].get('full_name'));
+			jtUtility.loadRecord(record[0]);
 		},
 		refreshList: function() {
 			this.$el.html('');

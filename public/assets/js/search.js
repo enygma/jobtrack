@@ -51,9 +51,7 @@ $(function(){
 			var recordId = $(evt.currentTarget).attr('href');
 			var record 	 = this.collection.where({id:recordId});
 
-			// set the form values
-			$('input[name=record_id]').val(record[0].get('id'));
-			$('input[name=full_name]').val(record[0].get('full_name'));
+			jtUtility.loadRecord(record[0]);
 		},
 	})
 
