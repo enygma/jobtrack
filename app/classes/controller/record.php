@@ -34,7 +34,7 @@ class Controller_Record extends Controller_Rest
 
 	public function get_index()
 	{
-		$query = Model_Record::find()->limit(10)->order_by('id','desc')->get();
+		$query = Model_Record::find()->limit(10)->order_by('updated_at','desc')->get();
 
 		$records = array();
 		foreach ($query as $r) {
@@ -52,13 +52,20 @@ class Controller_Record extends Controller_Rest
 		$content = self::getRequest();
 
 		error_log(print_r($content,true));
+		error_log(print_r(get_object_vars($content),true));
 
-		$fullName = $content->full_name;
+		$properties = array_keys(get_object_vars($content));
+
+		foreach($properties as $prop) {
+			$data[$prop] = $content->$prop;
+		}
+
+		//$fullName = $content->full_name;
 		error_log('posting! '.$fullName);
 
-		$data = array(
-			"full_name" => $content->full_name
-		);
+		// $data = array(
+		// 	"full_name" => $content->full_name
+		// );
 
 		$record = new Model_Record($data);
 		$record->save();

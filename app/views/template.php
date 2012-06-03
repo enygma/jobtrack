@@ -8,6 +8,8 @@
 		<!--<script src="/assets/js/bootstrap.min.js" type="text/javascript"></script>-->
 
 		<script src="/assets/js/jquery.min.js" type="text/javascript"></script>
+		<script src="/assets/js/bootstrap-dropdown.js" type="text/javascript"></script>
+
 		<script src="/assets/js/underscore-min.js" type="text/javascript"></script>
 		<script src="/assets/js/backbone-min.js" type="text/javascript"></script>
 	</head>
@@ -24,7 +26,12 @@
 					<div class="nav-collapse">
 						<ul class="nav">
 						<li class="active"><a href="#">Home</a></li>
-						<li class="active"><a href="#">Applicants</a></li>
+						<li class="active dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Applicants<b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="#">Add New</a></li>
+							</ul>
+						</li>
 						<li class="active"><a href="#">Positions</a></li>
 						</ul>
 					</div><!--/.nav-collapse -->
@@ -33,6 +40,7 @@
 		</div>
 
 		<div class="top-pad container">
+		<div id="messages"></div>
 		<?php echo $content; ?>
 		<hr>
 		<footer><p>test</p></footer>

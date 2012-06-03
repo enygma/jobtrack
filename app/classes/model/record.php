@@ -8,9 +8,32 @@ class Model_Record extends \Orm\Model
 			'data_type'  => 'varchar',
 			'label' 	 => 'Full Name',
 			'validation' => array('required')
-		)
+		),
+		'email' => array(
+			'data_type'  => 'varchar',
+			'label'		 => 'Email Address',
+			'validation' => array('required')
+		),
+		'location' => array(
+			'data_type'  => 'varchar',
+			'label'		 => 'Location',
+			'validation' => array('required')
+		),
+		'created_at',
+		'updated_at'
 	);
 	protected static $_table_name = 'records';
+
+	protected static $_observers = array(
+	    'Orm\\Observer_CreatedAt' => array(
+	        'events' => array('before_insert'),
+	        'property' => 'created_at',
+	    ),
+	    'Orm\\Observer_UpdatedAt' => array(
+	        'events' => array('before_save'),
+	        'property' => 'updated_at',
+	    )
+	);
 
 	public static function search($query)
 	{
