@@ -24,16 +24,7 @@
 					</a>
 					<a class="brand" href="#">JobTrack</a>
 					<div class="nav-collapse">
-						<ul class="nav">
-						<li class="active"><a href="#">Home</a></li>
-						<li class="active dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Applicants<b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><a href="#">Add New</a></li>
-							</ul>
-						</li>
-						<li class="active"><a href="#">Positions</a></li>
-						</ul>
+						<ul class="nav nav-items"></ul>
 					</div><!--/.nav-collapse -->
 				</div>
 			</div>
@@ -49,6 +40,7 @@
 	<!-- include modules -->
 	<script src="/assets/js/records.js" type="text/javascript"></script>
 	<script src="/assets/js/search.js" type="text/javascript"></script>
+	<script src="/assets/js/nav.js" type="text/javascript"></script>
 
 	<!-- include main app -->
 	<script src="/assets/js/app.js" type="text/javascript"></script>
