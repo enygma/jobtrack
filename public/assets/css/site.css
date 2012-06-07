@@ -12,3 +12,6 @@ form .help-block {
 a.clear-results {
 	font-size: 11px;
 }
+.form-error {
+	color: #A63836;
+}

@@ -16,7 +16,7 @@
 			<?php echo Form::input('tags'); ?>
 			<span class="help-block">Tags are comma-seperated</span>
 
-			<label for="resume">Resume</label>
+			<!--<label for="resume">Resume</label>
 			<?php echo Form::file('resume'); ?>
 			<span class="resume-link" style="display:none"></span>
 
@@ -26,7 +26,7 @@
 			<br/><br/>
 
 			<label for="source">Source</label>
-			<?php echo Form::input('source'); ?>
+			<?php echo Form::input('source'); ?>-->
 
 			<?php echo Form::hidden('record_id'); ?>
 

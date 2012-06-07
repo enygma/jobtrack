@@ -2,7 +2,8 @@ $(function() {
 	var RecordModel = Backbone.Model.extend({
 		defaults: {
 			full_name: 'Test Name',
-			id: 0
+			id: 0,
+			tags: ''
 		}
 	});
 
@@ -25,6 +26,11 @@ $(function() {
 		submitRecordForm: function(evt) {
 			evt.preventDefault(); // prevent the form submit
 
+			// remove any errors currently displayed
+			$("span[id^='errmsg-']").each(function(k,v){
+				$(v).remove();
+			});
+
 			// get the values for all of our form inputs
 			var inputs = $('#record-form input');
 			var values = {};
@@ -44,11 +50,19 @@ $(function() {
 
 			} else {
 				// POST request
-				records.create(values);
-				jtUtility.alert('Information saved!','Record Created!','success');
-			}
+				var res = records.create(values,{
+					wait: true,
+					error: function(model,response){ 
+						jtUtility.errorHandler(model,response);
+					},
+					success: function() {
+						jtUtility.alert('Information saved!','Record Created!','success');
 
-			$('#record-form :input').val('');
+						// if there were no errors, clear the list
+						$('#record-form :input').val('');
+					}
+				});
+			}
 
 			// refresh the list view too
 			this.options.list.refreshList();
@@ -74,6 +88,7 @@ $(function() {
 		},
 		loadRecord: function(evt) {
 			evt.preventDefault();
+			jtUtility.enableForm();
 
 			// find the record and populate the form with it
 			var recordId = $(evt.currentTarget).attr('href');
