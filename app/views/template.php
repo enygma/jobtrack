@@ -6,6 +6,7 @@
 		<link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="/assets/css/site.css" />
 		<!--<script src="/assets/js/bootstrap.min.js" type="text/javascript"></script>-->
+		<link href='http://fonts.googleapis.com/css?family=Habibi' rel='stylesheet' type='text/css'>
 
 		<script src="/assets/js/jquery.min.js" type="text/javascript"></script>
 		<script src="/assets/js/bootstrap-dropdown.js" type="text/javascript"></script>
@@ -22,7 +23,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					</a>
-					<a class="brand" href="#">JobTrack</a>
+					<a class="brand" href="/">JobTrack</a>
 					<div class="nav-collapse">
 						<ul class="nav nav-items"></ul>
 					</div><!--/.nav-collapse -->
@@ -34,12 +35,14 @@
 		<div id="messages"></div>
 		<?php echo $content; ?>
 		<hr>
-		<footer><p>test</p></footer>
+		<footer><p>jobtrack &copy; <?php echo date('Y'); ?></p></footer>
 		</div>
 	</body>
 	<!-- include modules -->
+	<script src="/assets/js/index.js" type="text/javascript"></script>
 	<script src="/assets/js/records.js" type="text/javascript"></script>
 	<script src="/assets/js/search.js" type="text/javascript"></script>
+	<script src="/assets/js/position.js" type="text/javascript"></script>
 	<script src="/assets/js/nav.js" type="text/javascript"></script>
 
 	<!-- include main app -->
