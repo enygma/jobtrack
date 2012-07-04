@@ -5,9 +5,8 @@ $(function() {
 	// nothing to see, move along
 	jtUtility = {
 		loadRecord: function(record) {
+			
 			// set the form values
-			console.log(record);
-
 			$('input[name=record_id]').val(record.get('id'));
 			$('input[name=full_name]').val(record.get('full_name'));
 			$('input[name=email]').val(record.get('email'));

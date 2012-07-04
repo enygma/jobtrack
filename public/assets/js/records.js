@@ -1,6 +1,7 @@
 $(function() {
 	var RecordModel = Backbone.Model.extend({
-		defaults: {
+		urlRoot  : '/record/index',
+		defaults : {
 			full_name: 'Test Name',
 			id: 0,
 			tags: ''
@@ -41,21 +42,37 @@ $(function() {
 			});
 
 			var recordId = $('input[name=record_id]').val();
+			console.log('record ID: '+recordId);
+
 			if (recordId > 0) {
-				// PUT request - find the record
-				var record = this.collection.where({id:recordId});
-				record[0].set(values);
-				record[0].save();
-				jtUtility.alert('Information saved!','Record Saved!','success');
+				// build the data into a new model instance - we're saving
+				var nRecord = new RecordModel({id:recordId});
+				nRecord.fetch({
+					success: function(m) {
+						console.log('success1');
+						// on success, set the new values and save
+						m.set(values);
+						m.save();
+						jtUtility.alert('Information saved!','Record Saved!','success');
+					},
+					error: function(model,response) {
+						console.log('error1');
+						jtUtility.errorHandler(model,response);
+					}
+				});
 
 			} else {
-				// POST request
-				var res = records.create(values,{
+				// PUT request
+				console.log('PUT');
+				var nRecord = new RecordModel(values);
+				nRecord.save(null,{
 					wait: true,
-					error: function(model,response){ 
+					error: function(model,response){
+						console.log('error2');
 						jtUtility.errorHandler(model,response);
 					},
-					success: function() {
+					success: function(msg) {
+						console.log('success2');
 						jtUtility.alert('Information saved!','Record Created!','success');
 
 						// if there were no errors, clear the list
@@ -92,21 +109,22 @@ $(function() {
 
 			// find the record and populate the form with it
 			var recordId = $(evt.currentTarget).attr('href');
-			var record 	 = this.collection.where({id:recordId});
+			console.log(recordId);
 
-			jtUtility.loadRecord(record[0]);
+			//var record 	 = this.collection.where({id:recordId});
+			var record = new RecordModel({id:recordId});
+			record.fetch({
+				success: function(model,response) {
+					jtUtility.loadRecord(model);
+				}
+			});
 		},
 		refreshList: function() {
 			this.$el.html('');
 			this.collection.fetch();
 		},
 		searchRecords: function() {
-			console.log('search!');
-
 			var searchQuery = $('#form_query').val();
-			console.log(searchQuery);
-			console.log(this.collection.url);
-
 			return this;
 		}
 	});

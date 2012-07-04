@@ -77,7 +77,7 @@ $(function(){
 			});
 		},
 		clearResults: function() {
-			console.log('clear');
+			// nothing to see, move along
 		}
 	});
 
