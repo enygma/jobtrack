@@ -27,7 +27,7 @@ class Model_Record extends \Orm\Model
 	protected static $_has_many = array(
 		'tags' => array(
 			'key_from' => 'email',
-			'model_to' => 'Model_Tag',
+			'model_to' => 'Model_Apptag',
 			'key_to'   => 'record_email'
 		)
 	);
@@ -41,7 +41,9 @@ class Model_Record extends \Orm\Model
 	        'events' => array('before_save'),
 	        'property' => 'updated_at',
 	    ),
-	    'Orm\\Observer_Validation'
+	    'Orm\\Observer_Validation' => array(
+	    	'events' => array('before_save')
+	    )
 	);
 
 	public static function search($query)
@@ -49,7 +51,7 @@ class Model_Record extends \Orm\Model
 		$result = Model_Record::find()
 			->where(DB::expr('lower(full_name)'),'like',"%".strtolower($query)."%")
 			->related('tags');
-			
+
 		$found  = array();
 
 		foreach ($result->get() as $res) {
@@ -59,13 +61,27 @@ class Model_Record extends \Orm\Model
 		return $found;
 	}
 
+	public static function remove($userEmail)
+	{
+		$result = Model_Tag::find()->where('record_email',$userEmail);
+		return $result;
+	}
+
 	/**
 	 * Checks to ensure that the email address we were given is unique
 	 */
 	public static function _validation_unique($data)
 	{
+		error_log('unique valiation');
+
 		$found = Model_Record::find()->where('email',$data)->get_one();
 		return ($found == null) ? true : false;
+	}
+
+	public static function recent($days=30)
+	{
+		$found = Model_Record::find()->where('created_at','>',strtotime('-'.$days.' days'))->get();
+		return $found;
 	}
 }
 
