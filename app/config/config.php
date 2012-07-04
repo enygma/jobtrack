@@ -141,7 +141,10 @@ return array(
 	),
 
 	'validation' => array(
-		'close_error' => '</li>'
+		'open_list'   => '',
+		'close_list'  => '',
+		'open_error'  => '',
+		'close_error' => '||'
 	),
 
 	/**
@@ -228,6 +231,9 @@ return array(
 		'language'  => array(),
 	),
 
+	'rest' => array(
+		'default_format' => 'json'
+	)
 );
 
 /* End of file config.php */
