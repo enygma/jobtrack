@@ -25,7 +25,6 @@ class Controller_Positions extends Controller_Base
 
 	public function action_view($positionId)
 	{
-		error_log('VIEW');
 		$position = Model_Position::find($positionId);
 		$data 	  = array('position' => $position);
 		$this->template->content = View::forge('positions/view',$data);	

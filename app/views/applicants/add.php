@@ -4,16 +4,26 @@
 			<?php echo Form::open(array('action'=>'/','class'=>'well')); ?>
 
 			<label for="name">Full Name</label>
-			<?php echo Form::input('full_name'); ?>
+			<?php echo Form::input('full_name',
+				(isset($applicant['full_name'])) ? $applicant['full_name'] : ''); ?>
 
 			<label for="email">Email</label>
-			<?php echo Form::input('email'); ?>
+			<?php echo Form::input('email',
+				(isset($applicant['email'])) ? $applicant['email'] : ''); ?>
 
 			<label for="location">Location</label>
-			<?php echo Form::input('location'); ?>
+			<?php echo Form::input('location',
+				(isset($applicant['location'])) ? $applicant['location'] : ''); ?>
 
 			<label for="tags">Tags</label>
-			<?php echo Form::input('tags'); ?>
+			<?php 
+				$tags = array();
+				if (isset($applicant['tags'])) { 
+					foreach ($applicant['tags'] as $tag) {
+						$tags[] = $tag->tag;
+					}
+				}
+				echo Form::input('tags',implode(', ',$tags)); ?>
 			<span class="help-block">Tags are comma-seperated</span>
 
 			<!--<label for="resume">Resume</label>
@@ -28,7 +38,8 @@
 			<label for="source">Source</label>
 			<?php echo Form::input('source'); ?>-->
 
-			<?php echo Form::hidden('record_id'); ?>
+			<?php echo Form::hidden('record_id',
+				(isset($applicant['id'])) ? $applicant['id'] : ''); ?>
 
 			<br/><br/>
 			<?php echo Form::button('Submit','submit',array('class'=>'btn','id'=>'submit-record')); ?>
