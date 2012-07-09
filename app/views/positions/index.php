@@ -30,7 +30,20 @@
 			<?php echo Form::input('contact_phone',
 				((isset($position->contact_phone)) ? $position->contact_phone : '')); ?>
 
-			<br/><br/>
+			<label for="tagged-with">Tagged wth</label>
+			<?php 
+				$tagList = array();
+				if (isset($position->tags)) {
+					foreach($position->tags as $tag) {
+						$tagList[] = $tag->tag;
+					}
+				}
+				echo Form::input('tagged_with',implode(',',$tagList)); ?>
+				<br/><br/>
+
+			<?php echo Form::hidden('position_id',
+				(isset($position->id)) ? $position->id : ''); ?>
+
 			<?php echo Form::button('Submit','submit',array('class'=>'btn','id'=>'submit-position')); ?>
 
 			<?php echo Form::close(); ?>

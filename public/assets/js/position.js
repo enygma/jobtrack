@@ -9,7 +9,8 @@ var PositionModel = Backbone.Model.extend({
 		contact_name  : 'John Doe',
 		contact_email : 'me@me.com',
 		contact_phone : '214-555-1234',
-		id            : 0
+		id            : 0,
+		tags          : ''
 	}
 });
 
@@ -22,6 +23,11 @@ var PositionFormView = Backbone.View.extend({
 	submitPositionForm: function(evt) {
 		evt.preventDefault();
 
+		// remove any errors currently displayed
+		$("span[id^='errmsg-']").each(function(k,v){
+			$(v).remove();
+		});
+
 		var inputs = $('#position-form input');
 		var values = {};
 		jQuery.each(inputs,function(k,input){
@@ -32,21 +38,47 @@ var PositionFormView = Backbone.View.extend({
 		// get our summary too
 		values['summary'] = $('#form_summary').val();
 
-		// make a new Position model (PUT)
-		var nPosition = new PositionModel(values);
-		nPosition.save(null,{
-			wait: true,
-			success: function(model,response) {
-				jtUtility.alert('Information saved!','Record Created!','success');
+		// see if we have an ID
+		var positionId = $('input[name=position_id]').val();
+		console.log('position ID: '+positionId);
 
-				// if there were no errors, clear the list
-				//$('#position-form :input').val('');
-			},
-			error: function(model,response) {
-				console.log('error!');
-				jtUtility.errorHandler(model,response);
-			}
-		});
+		if (positionId > 0) {
+			// build the data into a new model instance - we're saving (PUT)
+			var nPosition = new PositionModel({id:positionId});
+			nPosition.fetch({
+				success: function(m) {
+					// on success, set the new values and save
+					m.set(values);
+					m.save(null,{
+						error: function(model,response){ 
+							jtUtility.errorHandler(model,response);
+						}
+					});
+					jtUtility.alert('Information saved!','Record Saved!','success');
+				},
+				error: function(model,response) {
+					jtUtility.errorHandler(model,response);
+				}
+			});
+
+		} else {
+			// make a new Position model (POST)
+			values.id = null;
+			var nPosition = new PositionModel(values);
+
+			nPosition.save(null,{
+				wait: true,
+				success: function(model,response) {
+					jtUtility.alert('Information saved!','Record Created!','success');
+
+					// if there were no errors, clear the list
+					//$('#position-form :input').val('');
+				},
+				error: function(model,response) {
+					jtUtility.errorHandler(model,response);
+				}
+			});
+		}
 	}
 });
 

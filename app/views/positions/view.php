@@ -26,7 +26,20 @@
 		</td>
 	</tr>
 	<tr>
+		<td class="position-label">Tagged with</td>
+		<td>
+			<?php 
+			$tags = array();
+			foreach($position->tags as $tag) {
+				$tags[] = '<a href="/positions/tag/'.$tag->tag.'">'.$tag->tag.'</a>';
+			}
+			echo implode(',',$tags);
+			?>
+		</td>
+	</tr>
+	<tr>
 		<td colspan="2">
+			<br/><br/>
 			<?php echo Form::button(array(
 				'class'=>'btn','type'=>'button','value'=>'Edit',
 				'id'=>'edit-btn','name'=>$position->id)); ?>
