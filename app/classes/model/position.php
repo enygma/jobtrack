@@ -54,9 +54,20 @@ class Model_Position extends \Orm\Model
 	    )
 	);
 
+	protected static $_has_many = array(
+		'tags' => array(
+			'key_from' => 'id',
+			'model_to' => 'Model_Postag',
+			'key_to'   => 'position_id'
+		)
+	);
+
 	public static function recent($days=30)
 	{
-		$found = Model_Position::find()->where('created_at','>',strtotime('-'.$days.' days'))->get();
+		$found = Model_Position::find()
+			->where('created_at','>',strtotime('-'.$days.' days'))
+			->order_by('created_at','desc')
+			->get();
 		return $found;
 	}
 }
