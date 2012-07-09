@@ -80,7 +80,10 @@ class Model_Record extends \Orm\Model
 
 	public static function recent($days=30)
 	{
-		$found = Model_Record::find()->where('created_at','>',strtotime('-'.$days.' days'))->get();
+		$found = Model_Record::find()
+			->where('created_at','>',strtotime('-'.$days.' days'))
+			->order_by('created_at','desc')
+			->get();
 		return $found;
 	}
 }
