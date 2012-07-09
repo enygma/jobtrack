@@ -35,6 +35,13 @@ CREATE TABLE `position` (
 	PRIMARY KEY(ID)
 );
 
+CREATE TABLE `postags` (
+	position_id INT,
+	tag VARCHAR(200),
+	ID INT NOT NULL AUTO_INCREMENT,
+	PRIMARY KEY(ID)
+);
+
 -- CREATE TABLE `applicant` (
 -- 	first_name VARCHAR(200),
 -- 	last_name VARCHAR(200),
