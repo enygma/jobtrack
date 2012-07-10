@@ -31,7 +31,9 @@
 			<?php 
 			$tags = array();
 			foreach($position->tags as $tag) {
-				$tags[] = '<a href="/positions/tag/'.$tag->tag.'">'.$tag->tag.'</a>';
+				if (!empty($tag->tag)) {
+					$tags[] = '<a href="/positions/tag/'.$tag->tag.'">'.$tag->tag.'</a>';
+				}
 			}
 			echo implode(',',$tags);
 			?>

@@ -85,6 +85,7 @@ class Controller_Positions extends Controller_Base
 
 		// find the model to update
 		$position = Model_Position::find($id);
+
 		if ($position !== null) {
 			error_log('updating');
 
@@ -92,12 +93,28 @@ class Controller_Positions extends Controller_Base
 			foreach (get_object_vars($content) as $propName => $propValue) {
 				$position->$propName = $propValue;
 			}
-			error_log(print_r($position,true));
-
-			//$position->tags = array('test');
+			unset($position->tags);
 
 			try {
 				$position->save();
+
+				// update the position's tags
+				$tags = Model_Postag::find()->where('position_id',$position->id)->get();
+
+				foreach ($tags as $tag) {
+					$t = Model_Postag::find($tag->id);
+					$t->delete();
+				}
+				// add the new tags
+				foreach (explode(',',$tagged) as $tag) {
+					$val = array(
+						'position_id' => $position->id,
+						'tag' => trim($tag)
+					);
+					$p = new Model_Postag($val);
+					$p->save();
+				}
+
 			} catch (\Exception $e) {
 				$this->response($this->_parseErrors($e),400);
 			}

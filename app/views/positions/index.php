@@ -35,10 +35,12 @@
 				$tagList = array();
 				if (isset($position->tags)) {
 					foreach($position->tags as $tag) {
-						$tagList[] = $tag->tag;
+						if (!empty($tag->tag)) {
+							$tagList[] = $tag->tag;
+						}
 					}
 				}
-				echo Form::input('tagged_with',implode(',',$tagList)); ?>
+				echo Form::input('tagged_with',implode(', ',$tagList)); ?>
 				<br/><br/>
 
 			<?php echo Form::hidden('position_id',
