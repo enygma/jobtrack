@@ -31,9 +31,6 @@ class Controller_Base extends Controller_Hybrid
 
     public function _parseErrors($ex)
     {
-        error_log('validation failed');
-        error_log($ex->getMessage());
-
         $errorFields = array_keys($ex->get_fieldset()->error());
         $errors      = array();
         $messages    = explode('||', $ex->getMessage());
@@ -41,7 +38,6 @@ class Controller_Base extends Controller_Hybrid
         foreach ($errorFields as $index => $fieldName) {
             $errors[$fieldName] = $messages[$index];
         }
-        //error_log('ERRORS: '.print_r($errors,true));
         return array('errors' => $errors);
     }
 

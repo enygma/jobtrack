@@ -44,8 +44,6 @@ class Controller_Positions extends Controller_Base
 
     public function get_index($positionId=null)
     {
-        error_log('get index');
-
         $pos     = Model_Position::find()->order_by('created_at', 'desc')
             ->limit(10);
         if ($positionId !== null) {
