@@ -2,6 +2,14 @@
 
 class Controller_Positions extends Controller_Base
 {
+    /**
+     * Position index view (displays a form)
+     *     If a $positionId is given, form is populated
+     * 
+     * @param int $positionId Position ID # [optional]
+     * 
+     * @return null
+     */
     public function action_index($positionId=null)
     {
         $data = array();
@@ -13,18 +21,24 @@ class Controller_Positions extends Controller_Base
         $this->template->content = View::forge('positions/index', $data);
     }
 
+    /**
+     * Shows the recently added positons
+     * 
+     * @return null
+     */
     public function action_recent()
     {
         $data = array();
         $this->template->content = View::forge('positions/recent', $data);
     }
 
-    public function action_edit()
-    {
-        $data = array();
-        $this->template->content = View::forge('positions/edit', $data);
-    }
-
+    /**
+     * View a positon's details (including the related applicants)
+     * 
+     * @param int $positionID Position ID #
+     * 
+     * @return null
+     */
     public function action_view($positionId)
     {
         $position = Model_Position::find()->where('id', $positionId)
@@ -34,6 +48,12 @@ class Controller_Positions extends Controller_Base
         $this->template->content = View::forge('positions/view', $data); 
     }
 
+    /**
+     * Display positions tagged with the given value(s)
+     *     The $tags could possibly be a set appended using "+"
+     * 
+     * @param string $tags Tag values to search on
+     */
     public function action_tagged($tags)
     {
         $tags = explode('+', $tags);
@@ -42,6 +62,14 @@ class Controller_Positions extends Controller_Base
         $this->template->content = View::forge('positions/tagged', $data);
     }
 
+    /**
+     * API METHOD: Pull either the latest 10 positions or one
+     *     identified by the $positionId
+     * 
+     * @param int $positionId Position ID # [optional]
+     * 
+     * @return null
+     */
     public function get_index($positionId=null)
     {
         $pos     = Model_Position::find()->order_by('created_at', 'desc')
@@ -62,12 +90,12 @@ class Controller_Positions extends Controller_Base
     }
 
     /**
-     * Get the positions tagged with the given value(s)
+     * API METHOD: Get the positions tagged with the given value(s)
      *     "tag" value may contain multiple values, combined with a +
      * 
      * @param string $tags Tag(s) to search on
      * 
-     * @return void
+     * @return null
      */
     public function get_tagged($tags)
     {
@@ -84,6 +112,12 @@ class Controller_Positions extends Controller_Base
         $this->response($positionList);
     }
 
+    /**
+     * API METHOD: Handles the submssion of the new position form
+     *     Pulls the data directly from the request (self::getRequest)
+     * 
+     * @return null
+     */
     public function post_index()
     {
         $content = self::getRequest();
@@ -95,6 +129,13 @@ class Controller_Positions extends Controller_Base
             $this->response($this->_parseErrors($e), 400);
         }
     }
+
+    /**
+     * API METHOD: Handles the update of the position record when
+     *     submitted from the form (pulls data from self::getRequest)
+     * 
+     * @return null
+     */
     public function put_index()
     {
         $content = self::getRequest();
@@ -139,8 +180,14 @@ class Controller_Positions extends Controller_Base
             }
         }
     }
-    public function delete_index($positionId=null)
+    
+    /**
+     * API METHOD: Used to delete a position record
+     * 
+     * @param int $positionId Position ID to remove
+     */
+    public function delete_index($positionId)
     {
-
+        throw new \Exception('Not implemented');
     }
 }
