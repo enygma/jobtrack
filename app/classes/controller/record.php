@@ -128,6 +128,29 @@ class Controller_Record extends Controller_Base
 		$this->response($results);
 	}
 
+	/**
+	 * Get users (applicants) tagged with a value
+	 * 
+	 * @param string $tag Tag to search on
+	 * 
+	 * @return void
+	 */
+	public function get_tagged($tags)
+	{
+		$tags = explode('+',$tags);
+		
+		$app = Model_Record::find()->related('tags')
+			->where('tags.tag','in',$tags)->get();
+
+		$appList = array();
+		foreach($app as $a) {
+			$appList[] = $a;
+		}
+		error_log(print_r($appList,true));
+
+		$this->response($appList);
+	}
+
 }
 
 ?>
