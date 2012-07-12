@@ -8,11 +8,11 @@
 		<!--<script src="/assets/js/bootstrap.min.js" type="text/javascript"></script>-->
 		<link href='http://fonts.googleapis.com/css?family=Habibi' rel='stylesheet' type='text/css'>
 
-		<script src="/assets/js/jquery.min.js" type="text/javascript"></script>
-		<script src="/assets/js/bootstrap-dropdown.js" type="text/javascript"></script>
+		<script src="/assets/js/lib/jquery.min.js" type="text/javascript"></script>
+		<script src="/assets/js/lib/bootstrap-dropdown.js" type="text/javascript"></script>
 
-		<script src="/assets/js/underscore-min.js" type="text/javascript"></script>
-		<script src="/assets/js/backbone-min.js" type="text/javascript"></script>
+		<script src="/assets/js/lib/underscore-min.js" type="text/javascript"></script>
+		<script src="/assets/js/lib/backbone-min.js" type="text/javascript"></script>
 	</head>
 	<body>
 		<div class="navbar navbar-fixed-top">
