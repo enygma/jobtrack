@@ -29,13 +29,14 @@
 		<td class="position-label">Tagged with</td>
 		<td>
 			<?php 
-			$tags = array();
-			foreach($position->tags as $tag) {
-				if (!empty($tag->tag)) {
-					$tags[] = '<a href="/positions/tag/'.$tag->tag.'">'.$tag->tag.'</a>';
-				}
+			$tagList = array();
+			$tagLinks = array();
+			foreach($position->tags as $tag){ if(!empty($tag->tag)){ $tagList[] = $tag->tag; }}
+
+			foreach($tagList as $tag) {
+				$tagLinks[] = '<a href="/positions/tagged/'.$tag.'">'.$tag.'</a>';
 			}
-			echo implode(',',$tags);
+			echo implode(', ',$tagLinks);
 			?>
 		</td>
 	</tr>
@@ -45,6 +46,16 @@
 			<?php echo Form::button(array(
 				'class'=>'btn','type'=>'button','value'=>'Edit',
 				'id'=>'edit-btn','name'=>$position->id)); ?>
+		</td>
+	</tr>
+	<tr><td>&nbsp<br/></td></tr>
+	<tr>
+		<td class="position-label">Related Applicants (By Tags)</td>
+	</tr>
+	<tr>
+		<td>
+			<?php echo Form::hidden('positionTags',implode('+',$tagList)); ?>
+			<div id="relatedApplicants"></div>
 		</td>
 	</tr>
 </table>

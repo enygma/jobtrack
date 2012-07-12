@@ -34,6 +34,14 @@ class Controller_Positions extends Controller_Base
 		$this->template->content = View::forge('positions/view',$data);	
 	}
 
+	public function action_tagged($tags)
+	{
+		$tags = explode('+',$tags);
+
+		$data = array('tagged'=>$tags);
+		$this->template->content = View::forge('positions/tagged',$data);
+	}
+
 	public function get_index($positionId=null)
 	{
 		error_log('get index');
@@ -54,10 +62,19 @@ class Controller_Positions extends Controller_Base
 		$this->response($results);
 	}
 
-	public function get_tagged($tag)
+	public function get_tagged($tags)
 	{
-		// TODO
-		// find the positions tagged with the $tag
+		$tags = explode('+',$tags);
+		
+		$pos = Model_Position::find()->related('tags')
+			->where('tags.tag','in',$tags)->get();
+
+		$positionList = array();
+		foreach($pos as $p) {
+			$positionList[] = $p;
+		}
+
+		$this->response($positionList);
 	}
 
 	public function post_index()
