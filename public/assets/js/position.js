@@ -18,7 +18,7 @@ var PositionModel = Backbone.Model.extend({
 var PositionFormView = Backbone.View.extend({
 
 	events: {
-		'click #submit-position' : 'submitPositionForm',
+		'click #submit-position' : 'submitPositionForm'
 	},
 
 	submitPositionForm: function(evt) {
@@ -197,8 +197,7 @@ var PositionTaggedView = Backbone.View.extend({
 			record.set('tags',tagList.join(','));
 
 			var dt = new Date(record.get('created_at')*1000);
-			record.set('create_date',dt.getMonth()+'.'+dt.getDate()+'.'+dt.getFullYear()
-				+' @ '+dt.getHours()+':'+dt.getMinutes()+':'+dt.getSeconds());
+			record.set('create_date',dt.getMonth()+'.'+dt.getDate()+'.'+dt.getFullYear()+' @ '+dt.getHours()+':'+dt.getMinutes()+':'+dt.getSeconds());
 
 			self.$el.append(self.template( record.toJSON() ));
 		});

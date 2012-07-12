@@ -3,10 +3,10 @@
 var NavView = Backbone.View.extend({
 
 	template_item   : _.template('<li class="active" fn="<%= func %>"><a href="#"><%= name %></a></li>'),
-	template_parent : _.template('<li class="active dropdown">'
-		+'<a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= name %><b class="caret"></b></a>'
-		+'<ul class="dropdown-menu">'
-		+'<%= items %></ul></li>'),
+	template_parent : _.template('<li class="active dropdown"> \
+		<a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= name %><b class="caret"></b></a> \
+		<ul class="dropdown-menu"> \
+		<%= items %></ul></li>'),
 	template_child  : _.template('<li><a class="child" href="<%= href %>" fn="<%= func %>"><%= name %></a></li>'),
 
 	events: {
@@ -62,8 +62,7 @@ var nview = new NavView({
 			menu: [
 				{
 					name: 'Add New',
-					href: '/applicants/add',
-					//fn: 'addNewApplicant'
+					href: '/applicants/add'
 				}
 			]
 		},

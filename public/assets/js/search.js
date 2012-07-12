@@ -52,13 +52,13 @@ $(function(){
 			var record 	 = this.collection.where({id:recordId});
 
 			jtUtility.loadRecord(record[0]);
-		},
-	})
+		}
+	});
 
 	var SearchView = Backbone.View.extend({
 		
 		events: {
-			'click #search-btn' : 'searchRecords',
+			'click #search-btn' : 'searchRecords'
 		},
 
 		initialize: function() {

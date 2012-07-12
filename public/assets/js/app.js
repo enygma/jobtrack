@@ -53,7 +53,7 @@ $(function() {
 
 			jtUtility.alert(errors,"Oops! There's a problem!",'error');
 		}
-	}
+	};
 
 	alertView = Backbone.View.extend({
 

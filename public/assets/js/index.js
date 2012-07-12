@@ -16,8 +16,7 @@ var RecentPositionListView = Backbone.View.extend({
 		var m = this.collection.models[0].get('positions');
 		$.each(m,function(k,record){
 			var dt = new Date(record.created_at*1000);
-			record.create_date = dt.getMonth()+'.'+dt.getDate()+'.'+dt.getFullYear()
-				+' @ '+dt.getHours()+':'+dt.getMinutes()+':'+dt.getSeconds();
+			record.create_date = dt.getMonth()+'.'+dt.getDate()+'.'+dt.getFullYear()+' @ '+dt.getHours()+':'+dt.getMinutes()+':'+dt.getSeconds();
 
 			// split on the spaces and slice/append
 			var p = record.summary.split(' ');

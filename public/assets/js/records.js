@@ -17,7 +17,7 @@ $(function() {
 
 	var RecordFormView = Backbone.View.extend({
 		events: {
-			'click #submit-record' : 'submitRecordForm',
+			'click #submit-record' : 'submitRecordForm'
 		},
 
 		initialize: function() {
