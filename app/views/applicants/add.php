@@ -44,6 +44,12 @@
 			<br/><br/>
 			<?php echo Form::button('Submit','submit',array('class'=>'btn','id'=>'submit-record')); ?>
 
+			<?php 
+			if (isset($applicant) && isset($applicant['id'])) {
+				echo Form::button('Delete','delete',array('class'=>'btn','id'=>'delete-record'));
+			}
+			?>
+
 			<?php echo Form::close(); ?>
 		</div>
 	</div>

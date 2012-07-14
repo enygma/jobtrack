@@ -1,4 +1,4 @@
-$(function() {
+//$(function() {
 	var RecordModel = Backbone.Model.extend({
 		urlRoot  : '/record/index',
 		defaults : {
@@ -17,11 +17,26 @@ $(function() {
 
 	var RecordFormView = Backbone.View.extend({
 		events: {
-			'click #submit-record' : 'submitRecordForm'
+			'click #submit-record' : 'submitRecordForm',
+			'click #delete-record' : 'deleteRecord'
 		},
 
 		initialize: function() {
 			// nothing to see, move along
+		},
+
+		deleteRecord: function(evt) {
+			evt.preventDefault(); // prevent the form submit
+
+			var recordId = $("input[name='record_id']").val();
+			var nRecord  = new RecordModel({id:recordId});
+			
+			nRecord.destroy({
+				success: function() {
+					// send them back to the root page
+					window.location.href = '/';
+				}
+			})
 		},
 
 		submitRecordForm: function(evt) {
@@ -144,4 +159,4 @@ $(function() {
 	});
 
 	records.fetch();
-});
+//});

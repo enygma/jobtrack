@@ -73,6 +73,24 @@ class Controller_Record extends Controller_Base
         }
     }
 
+    public function delete_index($recordId)
+    {
+        $record = Model_Record::find($recordId);
+        if ($record !== null) {
+            try {
+                $record->delete();
+
+                // now remove its tags
+                $tags = Model_Apptag::find()->where('record_email',$record->email);
+                foreach ($tags as $tag) {
+                    $tag->delete();
+                }
+            } catch (\Exception $e) {
+                throw new \Exception('Error deleting!');
+            }
+        }
+    }
+
     public function post_index($recordId)
     {
         $content = self::getRequest();
