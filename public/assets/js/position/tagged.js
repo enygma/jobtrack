@@ -21,9 +21,7 @@ var PositionTaggedView = Backbone.View.extend({
 				tagList.push(tag.tag);
 			});
 			record.set('tags',tagList.join(','));
-
-			var dt = new Date(record.get('created_at')*1000);
-			record.set('create_date',dt.getMonth()+'.'+dt.getDate()+'.'+dt.getFullYear()+' @ '+dt.getHours()+':'+dt.getMinutes()+':'+dt.getSeconds());
+			record.set('create_date',jtUtility.formatTimestamp(record.get('created_at')));
 
 			self.$el.append(self.template( record.toJSON() ));
 		});

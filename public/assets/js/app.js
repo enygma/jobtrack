@@ -52,6 +52,12 @@ $(function() {
 			});
 
 			jtUtility.alert(errors,"Oops! There's a problem!",'error');
+		},
+		formatTimestamp: function(ts) {
+			var dt = new Date(ts*1000);
+			return dt.getMonth()+'.'+dt.getDate()+'.'
+				+dt.getFullYear()+' @ '+dt.getHours()+':'
+				+dt.getMinutes()+':'+dt.getSeconds()
 		}
 	};
 

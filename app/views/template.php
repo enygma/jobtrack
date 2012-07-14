@@ -13,7 +13,7 @@
 		<script data-main="/assets/js/require-config.js" src="/assets/js/lib/require.js" type="text/javascript"></script>
 		<script type="text/javascript">
 			require(['lib/bootstrap-dropdown','lib/backbone-min']);
-			require(['records','index','search','position','nav','app']);
+			require(['records','recent','search','position','nav','app']);
 		</script>
 	</head>
 	<body>

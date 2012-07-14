@@ -14,6 +14,7 @@ var PositionListView = Backbone.View.extend({
 		var self = this;
 
 		this.collection.each(function(record){
+			record.set('created_at',jtUtility.formatTimestamp(record.get('created_at')));
 			self.$el.append(self.template( record.toJSON() ));
 		});
 	}
