@@ -10,9 +10,11 @@
 		<!-- load the scripts and utilities -->
 		<script src="/assets/js/lib/jquery.min.js" type="text/javascript"></script>
 		<script src="/assets/js/lib/underscore-min.js" type="text/javascript"></script>
+		<script src="/assets/js/lib/backbone-min.js" type="text/javascript"></script>
+
 		<script data-main="/assets/js/require-config.js" src="/assets/js/lib/require.js" type="text/javascript"></script>
 		<script type="text/javascript">
-			require(['lib/bootstrap-dropdown','lib/backbone-min']);
+			require(['lib/bootstrap-dropdown']);
 			require(['records','recent','search','position','nav','app']);
 		</script>
 	</head>

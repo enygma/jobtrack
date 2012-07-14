@@ -188,6 +188,21 @@ class Controller_Positions extends Controller_Base
      */
     public function delete_index($positionId)
     {
-        throw new \Exception('Not implemented');
+        $pos = Model_Position::find($positionId);
+        try {
+            if ($pos !== null) {
+                $pos->delete();
+
+                //remove its tags too
+                $tags = Model_Postag::find()->where('position_id', $positionId);
+                foreach ($tags as $tag) {
+                    $tag->delete();
+                }
+            } else {
+                $this->response('Position not found', 404);
+            }
+        } catch (\Exception $e) {
+            $this->response($this->_parseErrors($e), 404);
+        }
     }
 }

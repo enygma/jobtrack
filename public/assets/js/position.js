@@ -88,6 +88,24 @@ var PositionFormView = Backbone.View.extend({
 // click to edit button
 $('#edit-btn').click(function(e){
 	var target = $(e.currentTarget);
-	console.log(target);
 	window.location = '/positions/index/'+target.attr('name');
+});
+$('#delete-btn').click(function(e){
+	var cnf = confirm('Are you sure you want to delete this position?');
+	if (cnf == true) {
+		// they want to remove it
+		var target     = $(e.currentTarget);
+		var positionId = target.attr('name');
+		var nPosition  = new PositionModel({id:positionId});
+		nPosition.destroy({
+			success: function(model,response) {
+				// forward them back to the list page
+				window.location.href = '/positions/recent';
+			},
+			error: function(model,response) {
+				console.log('There was an error removing the position!');
+				console.log(response);
+			}
+		});
+	}
 });

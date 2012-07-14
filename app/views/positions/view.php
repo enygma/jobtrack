@@ -46,6 +46,10 @@
 			<?php echo Form::button(array(
 				'class'=>'btn','type'=>'button','value'=>'Edit',
 				'id'=>'edit-btn','name'=>$position->id)); ?>
+
+			<?php echo Form::button(array(
+				'class'=>'btn','type'=>'button','value'=>'Delete',
+				'id'=>'delete-btn','name'=>$position->id)); ?>
 		</td>
 	</tr>
 	<tr><td>&nbsp<br/></td></tr>
